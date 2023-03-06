@@ -41,8 +41,7 @@ public class Event {
     private List<RaceType> raceTypeList;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "EVENT_ORGANIZER", joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "organizer_id"))
+    @JoinTable(name = "EVENT_ORGANIZER", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "organizer_id"))
     private List<Organizer> organizerList = new ArrayList<>();
     // initialize the list with an empty ArrayList
 

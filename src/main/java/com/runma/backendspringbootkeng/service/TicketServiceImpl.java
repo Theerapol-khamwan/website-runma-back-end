@@ -4,28 +4,26 @@ import com.runma.backendspringbootkeng.Model.TicketDTORequest;
 import com.runma.backendspringbootkeng.Model.TicketDTOResponse;
 import com.runma.backendspringbootkeng.entity.Ticket;
 import com.runma.backendspringbootkeng.entity.User;
-import com.runma.backendspringbootkeng.mapper.TicketDTORequestMapper;
-import com.runma.backendspringbootkeng.mapper.TicketDTOResponseMapper;
+import com.runma.backendspringbootkeng.mapper.TicketDTOMapper;
 import com.runma.backendspringbootkeng.repository.TicketRepository;
 import com.runma.backendspringbootkeng.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
     private final UserRepository userRepository;
-    private final TicketDTOResponseMapper ticketDTOResponseMapper;
-    private final TicketDTORequestMapper ticketDTORequestMapper;
+    private final TicketDTOMapper ticketDTOMapper;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, UserRepository userRepository, TicketDTOResponseMapper ticketDTOResponseMapper, TicketDTORequestMapper ticketDTORequestMapper) {
+    public TicketServiceImpl(TicketRepository ticketRepository, UserRepository userRepository, TicketDTOMapper ticketDTOMapper) {
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
-        this.ticketDTOResponseMapper = ticketDTOResponseMapper;
-        this.ticketDTORequestMapper = ticketDTORequestMapper;
+        this.ticketDTOMapper = ticketDTOMapper;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketDTOResponse findById(Integer theId) {
         return ticketRepository.findById(theId)
-                .map(ticketDTOResponseMapper)
+                .map((Function<Ticket, TicketDTOResponse>) ticketDTOMapper::ticketResponse)
                 .orElseThrow(() -> new RuntimeException("Ticket with id [%s] not found".formatted(theId)));
     }
 
@@ -52,7 +50,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket with id [%s] not found".formatted(ticketId)));
 
-        ticket = ticketDTORequestMapper.apply(updateRequest, ticket);
+        ticket = ticketDTOMapper.ticketRequest(updateRequest, ticket);
         ticketRepository.save(ticket);
     }
 

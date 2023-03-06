@@ -46,6 +46,7 @@ public class User {
 
     @OneToMany
     private List<Ticket> ticket;
+
 }
 
 

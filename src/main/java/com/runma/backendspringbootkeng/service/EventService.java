@@ -8,8 +8,8 @@ public interface EventService {
 
     public List<Event> findAll();
 
-    //    public void save(Event theEvent, Integer ogId);
     public Event save(Event theEvent, Integer organizerId);
 
+    public Event update(Integer eventId, Event updateRequest);
 
 }

@@ -9,6 +9,7 @@ import com.runma.backendspringbootkeng.repository.RaceTypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -49,6 +50,27 @@ public class EventServiceImpl implements EventService {
         }
 
         return resultEvent;
+    }
+
+    @Override
+    public Event update(Integer eventId, Event updateRequest) {
+        Optional<Event> event = eventRepository.findById(eventId);
+
+        if (event.isPresent()) {
+            Event theEvent = event.get();
+            theEvent.setName(updateRequest.getName());
+            theEvent.setRace_Date_time(updateRequest.getRace_Date_time());
+            theEvent.setOpen_Regis_Date(updateRequest.getOpen_Regis_Date());
+            theEvent.setClose_Regis_Date(updateRequest.getClose_Regis_Date());
+            theEvent.setOut_of_ticket_flag(updateRequest.getOut_of_ticket_flag());
+            theEvent.setProvince(updateRequest.getProvince());
+            theEvent.setLocation(updateRequest.getLocation());
+            theEvent.setCapacity(updateRequest.getCapacity());
+
+            return eventRepository.save(theEvent);
+        } else {
+            throw new RuntimeException("Event with ID " + eventId + " not found.");
+        }
     }
 
 

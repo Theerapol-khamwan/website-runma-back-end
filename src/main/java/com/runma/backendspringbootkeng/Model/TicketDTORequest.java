@@ -1,14 +1,20 @@
 package com.runma.backendspringbootkeng.Model;
 
 import com.runma.backendspringbootkeng.entity.Status;
+import lombok.Data;
 
 import java.util.Date;
 
-public record TicketDTORequest(
-        Status status,
-        String bankName,
-        Date paidDate,
-        Integer amount,
-        String imageProof
-) {
+@Data
+public class TicketDTORequest {
+
+    private Status status;
+
+    private String bankName;
+
+    private Date paidDate;
+
+    private Integer amount;
+
+    private String imageProof;
 }

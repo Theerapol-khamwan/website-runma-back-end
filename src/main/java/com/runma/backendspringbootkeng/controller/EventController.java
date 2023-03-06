@@ -30,4 +30,10 @@ public class EventController {
         return theEven;
     }
 
+    @PutMapping("/{eventId}")
+    public Event update(@PathVariable Integer eventId, @RequestBody Event updateRequest) {
+        return eventService.update(eventId, updateRequest);
+    }
+
+
 }

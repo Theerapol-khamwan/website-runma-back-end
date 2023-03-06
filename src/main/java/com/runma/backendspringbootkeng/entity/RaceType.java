@@ -26,11 +26,11 @@ public class RaceType {
 
     private Integer distance;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Ticket> ticket;
 }
 

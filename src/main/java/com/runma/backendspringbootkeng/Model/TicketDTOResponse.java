@@ -1,15 +1,18 @@
 package com.runma.backendspringbootkeng.Model;
 
 import com.runma.backendspringbootkeng.entity.Status;
+import lombok.Data;
 
 import java.util.Date;
 
-public record TicketDTOResponse(
-        Integer id,
-        Date createDate,
-        Status status,
-        String raceTypeName,
-        Double raceTypePrize,
-        Integer userId
-) {
+@Data
+public class TicketDTOResponse {
+
+    private Integer id;
+    private Date createDate;
+    private Status status;
+    private String raceTypeName;
+    private Double raceTypePrize;
+    private Integer userId;
+
 }
