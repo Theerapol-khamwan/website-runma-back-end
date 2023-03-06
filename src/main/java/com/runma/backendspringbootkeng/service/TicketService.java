@@ -12,7 +12,6 @@ public interface TicketService {
 
     public TicketDTOResponse findById(Integer theId);
 
-
     public void save(Ticket theTicket);
 
     public void update(Integer ticketId, TicketDTORequest updateRequest);
@@ -21,5 +20,7 @@ public interface TicketService {
 
     public void deleteById(Integer theId);
 
-    public List<Ticket> findByUserId(int theId);
+    public List<Ticket> findByUserId(Integer userId);
+
+    public List<Ticket> querySaleReport(Integer eventID);
 }

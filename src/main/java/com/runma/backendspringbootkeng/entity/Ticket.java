@@ -28,10 +28,8 @@ public class Ticket {
 
     private String imageProof;
 
-
     @ManyToOne
     private User userID;
-
 
     @ManyToOne
     private RaceType raceType;

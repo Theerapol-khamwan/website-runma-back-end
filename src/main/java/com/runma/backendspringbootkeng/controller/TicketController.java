@@ -19,7 +19,7 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> findAll() {
+    public List<Ticket> getTicketAll() {
         return ticketService.findAll();
     }
 
@@ -30,14 +30,14 @@ public class TicketController {
 
 
     @PostMapping
-    public Ticket createTicket(@RequestBody Ticket theTicket) {
+    public Ticket create(@RequestBody Ticket theTicket) {
         theTicket.setId(0);
         ticketService.save(theTicket);
         return theTicket;
     }
 
     @PutMapping("/{ticketId}")
-    public String updateTicket(@PathVariable Integer ticketId, @RequestBody TicketDTORequest updateRequest) {
+    public String update(@PathVariable Integer ticketId, @RequestBody TicketDTORequest updateRequest) {
 
         ticketService.update(ticketId, updateRequest);
 
@@ -59,7 +59,7 @@ public class TicketController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<Ticket> searchByUser(@PathVariable int userId) {
+    public List<Ticket> searchByUser(@PathVariable Integer userId) {
         List<Ticket> theTicketByUser = ticketService.findByUserId(userId);
 
         if (theTicketByUser == null || theTicketByUser.isEmpty()) {
@@ -68,5 +68,11 @@ public class TicketController {
 
         return theTicketByUser;
     }
+
+    @GetMapping("/query_sale_report/{eventId}")
+    public List<Ticket> querySaleReport(@PathVariable Integer eventId) {
+        return ticketService.querySaleReport(eventId);
+    }
+
 
 }

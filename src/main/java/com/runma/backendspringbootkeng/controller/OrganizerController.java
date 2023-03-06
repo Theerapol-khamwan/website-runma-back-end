@@ -17,12 +17,12 @@ public class OrganizerController {
     }
 
     @GetMapping
-    public List<Organizer> findAll() {
+    public List<Organizer> getOrganizerAll() {
         return organizerService.findAll();
     }
 
     @PostMapping
-    public Organizer createOrganizer(@RequestBody Organizer theOrganizer) {
+    public Organizer create(@RequestBody Organizer theOrganizer) {
         theOrganizer.setId(0);
 
         organizerService.save(theOrganizer);
