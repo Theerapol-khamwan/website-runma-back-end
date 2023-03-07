@@ -45,7 +45,7 @@ public class User {
 
     private int postalCode;
 
-    @OneToMany
+    @OneToMany(mappedBy = "userID")
     private List<Ticket> ticket;
 
 }

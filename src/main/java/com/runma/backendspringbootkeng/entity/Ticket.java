@@ -28,10 +28,12 @@ public class Ticket {
 
     private String imageProof;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_ticket")
     private User userID;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "raceType_ticket")
     private RaceType raceType;
 
 }

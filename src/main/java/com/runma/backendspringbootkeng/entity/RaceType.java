@@ -30,7 +30,7 @@ public class RaceType {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "raceType", fetch = FetchType.LAZY)
     private List<Ticket> ticket;
 }
 
